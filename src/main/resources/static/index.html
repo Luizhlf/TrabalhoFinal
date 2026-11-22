@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#6250f5">
+
+    <meta name="description"
+          content="Lumora: descubra produtos incríveis, novidades e escolhas que combinam com você.">
+
+    <title>Lumora | Sua Loja Online</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+    <!-- ======================================
+         CABEÇALHO
+         ====================================== -->
+
+    <header class="topo">
+
+        <a class="marca" href="/" aria-label="Lumora - Página inicial">
+            lumora<span>.</span>
+        </a>
+
+        <nav aria-label="Menu principal">
+
+            <a href="/#produtos">
+                Produtos
+            </a>
+
+            <a href="/login.html">
+                Entrar
+            </a>
+
+            <button
+                type="button"
+                id="abrirCarrinho"
+                class="btn btn-claro">
+
+                Carrinho
+
+                <b id="contador">0</b>
+
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ======================================
+         BANNER PRINCIPAL
+         ====================================== -->
+
+    <section class="hero">
+
+        <div class="hero-conteudo">
+
+            <p class="sobretitulo">
+                ✦ BEM-VINDO À LUMORA
+            </p>
+
+            <h1>
+                Seu mundo.<br>
+                <em>Suas escolhas.</em>
+            </h1>
+
+            <p>
+                Produtos incríveis, novidades e tudo
+                aquilo que combina com o seu estilo.
+                Explore nossa coleção e encontre
+                seu próximo favorito!
+            </p>
+
+            <a class="btn" href="#produtos">
+                Explorar produtos ✦
+            </a>
+
+        </div>
+
+
+        <!-- Card de destaque -->
+
+        <div class="hero-card">
+
+            <div class="circulo">
+                ✦
+            </div>
+
+            <span>
+                DESCUBRA ALGO NOVO
+            </span>
+
+            <strong>
+                Escolhas que<br>
+                surpreendem.
+            </strong>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================
+         CATÁLOGO DE PRODUTOS
+         ====================================== -->
+
+    <main class="container" id="produtos">
+
+        <div class="secao-titulo">
+
+            <div>
+
+                <p class="sobretitulo">
+                    ✦ NOSSA COLEÇÃO
+                </p>
+
+                <h2>
+                    Encontre seu próximo favorito
+                </h2>
+
+            </div>
+
+
+            <!-- Pesquisa de produtos -->
+
+            <input
+                id="pesquisa"
+                type="search"
+                placeholder="Buscar produto..."
+                aria-label="Buscar produto"
+                autocomplete="off">
+
+        </div>
+
+
+        <!-- Produtos carregados pela API -->
+
+        <div id="listaProdutos" class="produtos">
+
+            <p>
+                Carregando produtos...
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- ======================================
+         CARRINHO DE COMPRAS
+         ====================================== -->
+
+    <aside
+        id="carrinho"
+        class="carrinho escondido"
+        aria-label="Carrinho de compras">
+
+        <div class="carrinho-topo">
+
+            <h2>
+                Seu carrinho
+            </h2>
+
+            <button
+                type="button"
+                id="fecharCarrinho"
+                class="fechar"
+                aria-label="Fechar carrinho">
+
+                &times;
+
+            </button>
+
+        </div>
+
+
+        <!-- Itens adicionados -->
+
+        <div id="itensCarrinho"></div>
+
+
+        <!-- Total da compra -->
+
+        <div class="total">
+
+            <span>
+                Total
+            </span>
+
+            <strong id="total">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+
+        <!-- Finalização -->
+
+        <a
+            class="btn btn-full"
+            href="/checkout.html">
+
+            Finalizar compra
+
+        </a>
+
+    </aside>
+
+
+    <!-- ======================================
+         RODAPÉ
+         ====================================== -->
+
+    <footer>
+
+        <p>
+            <strong>Lumora © 2026</strong>
+        </p>
+
+        <p>
+            Seu mundo. Suas escolhas.
+        </p>
+
+        <p>
+            Projeto acadêmico de
+            Desenvolvimento de Software II.
+        </p>
+
+    </footer>
+
+
+    <!-- ======================================
+         JAVASCRIPT
+         ====================================== -->
+
+    <!-- Produtos, pesquisa e carrinho -->
+    <script src="/js/app.js"></script>
+
+    <!-- Navegação conforme usuário logado -->
+    <script src="/js/nav.js"></script>
+
+</body>
+
+</html>

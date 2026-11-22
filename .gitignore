@@ -1,14 +1,29 @@
-# Build, IDE e arquivos locais
+
+# Arquivos gerados pelo Maven
 /target/
 **/target/
+
+# Arquivos do Eclipse
+.classpath
+.project
+.settings/
+
+# Arquivos de outras IDEs
 .idea/
 .vscode/
 *.iml
+
+# Arquivos temporários
 .DS_Store
 *.log
+
+# Variáveis de ambiente
 .env
 .env.*
 !.env.example
-# Credenciais de desenvolvimento. Nunca versionar.
+
+# Credenciais locais do Neon
 src/main/resources/application-local.properties
-# Eclipse: arquivos locais/pessoais podem ser mantidos fora do repo
+
+# Arquivos temporários de backup
+README_LOCAL_BACKUP.md

@@ -1,0 +1,14 @@
+# Build, IDE e arquivos locais
+/target/
+**/target/
+.idea/
+.vscode/
+*.iml
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+# Credenciais de desenvolvimento. Nunca versionar.
+src/main/resources/application-local.properties
+# Eclipse: arquivos locais/pessoais podem ser mantidos fora do repo

@@ -1,0 +1,13 @@
+.git
+.gitignore
+**/target
+**/.settings
+**/.classpath
+**/.project
+.idea
+.vscode
+.env
+.env.*
+**/application-local.properties
+*.zip
+*.log

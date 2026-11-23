@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Pagamento | Vitrine</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .pagamento-container {
+            max-width: 650px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .pagamento-card {
+            background: #f5f4ee;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .pagamento-card label {
+            display: block;
+            margin: 15px 0;
+            cursor: pointer;
+        }
+
+        .pagamento-card input {
+            margin-right: 10px;
+        }
+
+        .pagamento-card button {
+            margin-top: 20px;
+        }
+
+        #mensagem {
+            margin-top: 20px;
+        }
+
+        .aviso {
+            display: block;
+            margin-top: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="pagamento-container">
+
+    <h1>Pagamento do pedido</h1>
+
+    <p>
+        <a href="/meus-pedidos.html">
+            Voltar aos meus pedidos
+        </a>
+    </p>
+
+    <section class="pagamento-card">
+
+        <h2 id="numeroPedido">
+            Carregando pedido...
+        </h2>
+
+        <p id="valorPedido"></p>
+
+        <h3>Escolha a forma de pagamento</h3>
+
+        <form id="formPagamento">
+
+            <label>
+                <input type="radio"
+                       name="metodo"
+                       value="PIX"
+                       required>
+                PIX
+            </label>
+
+            <label>
+                <input type="radio"
+                       name="metodo"
+                       value="CARTAO">
+                Cartão de crédito
+            </label>
+
+            <label>
+                <input type="radio"
+                       name="metodo"
+                       value="BOLETO">
+                Boleto bancário
+            </label>
+
+            <button type="submit"
+                    id="confirmarPagamento"
+                    class="btn"
+                    disabled>
+                Confirmar pagamento
+            </button>
+
+        </form>
+
+        <p id="mensagem" role="status"></p>
+
+        <small class="aviso">
+            Pagamento fictício para fins acadêmicos.
+            Nenhuma cobrança real será realizada.
+        </small>
+
+    </section>
+
+</main>
+
+<script src="/js/pagamento.js"></script>
+<script src="/js/nav.js"></script>
+</body>
+</html>

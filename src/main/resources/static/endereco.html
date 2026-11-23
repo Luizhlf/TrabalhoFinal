@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Meus Endereços | Vitrine</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .endereco-container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .endereco-card {
+            background: #f5f4ee;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .endereco-card label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .endereco-card input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .endereco-card button {
+            margin-top: 15px;
+        }
+
+        .endereco-item {
+            padding: 18px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .endereco-item:last-child {
+            border-bottom: none;
+        }
+
+        .acoes-endereco {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-excluir {
+            background: #a33;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .btn-excluir:hover {
+            background: #822;
+        }
+
+        .endereco-aviso {
+            color: #865c24;
+            font-size: 14px;
+        }
+
+        #mensagem {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="endereco-container">
+
+    <h1>Meus endereços</h1>
+
+    <p>Cadastre e gerencie seus endereços de entrega.</p>
+
+    <p>
+        <a href="/">Voltar para a loja</a>
+    </p>
+
+    <section class="endereco-card">
+
+        <h2 id="tituloFormulario">Cadastrar endereço</h2>
+
+        <form id="formEndereco">
+
+            <input type="hidden" id="enderecoId">
+
+            <label for="cep">CEP</label>
+            <input type="text" id="cep"
+                   placeholder="00000-000"
+                   maxlength="9"
+                   inputmode="numeric"
+                   required>
+
+            <button type="button" id="buscarCep" class="btn">
+                Buscar CEP
+            </button>
+
+            <label for="logradouro">Logradouro</label>
+            <input type="text" id="logradouro"
+                   maxlength="150" required>
+
+            <label for="numero">Número</label>
+            <input type="text" id="numero" required>
+
+            <label for="complemento">Complemento</label>
+            <input type="text" id="complemento"
+                   placeholder="Apartamento, bloco etc.">
+
+            <label for="bairro">Bairro</label>
+            <input type="text" id="bairro"
+                   maxlength="100" required>
+
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade"
+                   maxlength="100" required>
+
+            <label for="uf">Estado (UF)</label>
+            <input type="text" id="uf"
+                   maxlength="2" required>
+
+            <div class="acoes-endereco">
+
+                <button type="submit" class="btn"
+                        id="salvar">
+                    Salvar endereço
+                </button>
+
+                <button type="button"
+                        id="cancelarEdicao"
+                        class="btn btn-claro"
+                        hidden>
+                    Cancelar edição
+                </button>
+
+            </div>
+        </form>
+
+        <p id="mensagem" role="status"></p>
+
+    </section>
+
+    <section class="endereco-card">
+
+        <h2>Endereços cadastrados</h2>
+
+        <div id="listaEnderecos">
+            Carregando endereços...
+        </div>
+
+    </section>
+
+</main>
+
+<script src="/js/endereco.js"></script>
+<script src="/js/nav.js"></script>
+</body>
+</html>

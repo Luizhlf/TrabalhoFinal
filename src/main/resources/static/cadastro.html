@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Criar conta | Vitrine</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="pagina-form">
+
+    <a class="marca" href="/">
+        Vitrine<span>.</span>
+    </a>
+
+    <form id="cadastroForm" class="form-card">
+
+        <p class="sobretitulo">
+            FAÇA PARTE
+        </p>
+
+        <h1>Criar conta</h1>
+
+        <label>
+            Nome
+            <input
+                id="nome"
+                type="text"
+                autocomplete="name"
+                required>
+        </label>
+
+        <label>
+            E-mail
+            <input
+                id="email"
+                type="email"
+                autocomplete="email"
+                required>
+        </label>
+
+        <label>
+            Senha
+            <input
+                id="senha"
+                type="password"
+                minlength="6"
+                autocomplete="new-password"
+                required>
+        </label>
+
+        <button type="submit" class="btn btn-full">
+            Cadastrar
+        </button>
+
+        <p id="mensagem" class="mensagem" role="status"></p>
+
+        <p>
+            Já tem conta?
+            <a href="/login.html">Entrar</a>
+        </p>
+
+        <p>
+            <a href="/">Voltar para a loja</a>
+        </p>
+
+    </form>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/nav.js"></script>
+
+</body>
+</html>

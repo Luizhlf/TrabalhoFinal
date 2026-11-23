@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Finalizar compra | Vitrine</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .checkout {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .checkout-card {
+            padding: 25px;
+            margin: 20px 0;
+            background: #f5f4ee;
+            border-radius: 12px;
+        }
+
+        .checkout-card select {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+        }
+
+        .checkout-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #confirmar {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="checkout">
+
+        <h1>Finalizar compra</h1>
+
+        <p><a href="/">Voltar para a loja</a></p>
+
+        <section class="checkout-card">
+            <h2>Resumo da compra</h2>
+
+            <div id="resumo"></div>
+
+            <h3>Total: <span id="totalCompra">R$ 0,00</span></h3>
+        </section>
+
+        <section class="checkout-card">
+            <h2>Endereço de entrega</h2>
+
+            <label for="endereco">Selecione seu endereço</label>
+
+            <select id="endereco">
+                <option value="">Carregando...</option>
+            </select>
+
+            <p>
+                <a href="/endereco.html">
+                    Cadastrar novo endereço
+                </a>
+            </p>
+        </section>
+
+        <button id="confirmar" class="btn">
+            Confirmar pedido
+        </button>
+
+        <p id="mensagem" role="status"></p>
+
+        <p>
+            <a href="/meus-pedidos.html">Ver meus pedidos</a>
+        </p>
+
+    </main>
+
+    <script src="/js/checkout.js"></script>
+    <script src="/js/nav.js"></script>
+</body>
+</html>

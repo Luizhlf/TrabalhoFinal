@@ -1,0 +1,722 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Administração | Vitrine</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+
+        /* Estrutura do painel */
+
+        .admin-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .admin-card {
+            background: #f5f4ee;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .admin-card label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        .admin-card input,
+        .admin-card textarea,
+        .admin-card select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .admin-card textarea {
+            min-height: 80px;
+        }
+
+        .admin-card button {
+            margin-top: 15px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        .admin-card button[hidden] {
+            display: none;
+        }
+
+        .admin-secao {
+            margin-bottom: 40px;
+        }
+
+        .admin-secao h2 {
+            margin-bottom: 20px;
+        }
+
+        /* Navegação interna */
+
+        .admin-navegacao {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .admin-navegacao a {
+            text-decoration: none;
+        }
+
+        /* Tabelas */
+
+        .admin-lista {
+            overflow-x: auto;
+        }
+
+        .admin-tabela {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-tabela th,
+        .admin-tabela td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .admin-tabela button {
+            margin: 3px;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        /* Gerenciamento de pedidos */
+
+        .pedido-status {
+            font-weight: bold;
+        }
+
+        .pedido-acoes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .pedido-acoes button {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .btn-enviar {
+            background: #355b45;
+            color: white;
+        }
+
+        .btn-entregar {
+            background: #305e8b;
+            color: white;
+        }
+
+        .btn-cancelar {
+            background: #a33;
+            color: white;
+        }
+
+        .pedido-acoes button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Resumo dos pedidos */
+
+        .resumo-pedidos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .resumo-card {
+            background: #fff;
+            border: 1px solid #e3e3e3;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .resumo-card h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .resumo-card strong {
+            display: block;
+            font-size: 30px;
+            color: #355b45;
+        }
+
+        /* Filtro dos pedidos */
+
+        .filtro-pedidos {
+            margin: 25px 0;
+        }
+
+        .filtro-pedidos label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .filtro-pedidos select {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+        }
+
+        /* Gerenciamento de categorias */
+
+        #gerenciarCategorias h3 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        #gerenciarCategorias .btn-editar-categoria {
+            background: #355b45;
+            color: white;
+            border: none;
+            border-radius: 6px;
+        }
+
+        #gerenciarCategorias .btn-editar-categoria:hover {
+            opacity: 0.9;
+        }
+
+        .detalhes-pedido-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+        .detalhes-pedido-grid p { overflow-wrap: anywhere; }
+        .admin-tabela td { overflow-wrap: anywhere; }
+        /* Responsividade */
+
+        @media (max-width: 800px) {
+
+            .resumo-pedidos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .admin-container {
+                padding: 15px;
+            }
+
+            .admin-card {
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .resumo-pedidos {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-navegacao {
+                flex-direction: column;
+            }
+
+            .admin-navegacao a {
+                text-align: center;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- Cabeçalho -->
+
+<header class="topo">
+
+    <a class="marca" href="/">
+        Vitrine<span>.</span>
+    </a>
+
+    <nav>
+
+        <a href="/">Ver loja</a>
+
+        <button
+            type="button"
+            id="sair"
+            class="btn">
+            Sair
+        </button>
+
+    </nav>
+
+</header>
+
+<!-- Painel administrativo -->
+
+<main class="admin-container">
+
+    <h1>Painel Administrativo</h1>
+
+    <p>
+        Gerenciamento dos produtos, categorias
+        e pedidos da loja.
+    </p>
+
+    <!-- Navegação interna -->
+
+    <div class="admin-navegacao">
+
+        <a href="#cadastroProduto" class="btn">
+            Cadastrar produto
+        </a>
+
+        <a href="#produtosCadastrados"
+           class="btn btn-claro">
+            Gerenciar produtos
+        </a>
+
+        <a href="#gerenciarCategorias"
+           class="btn btn-claro">
+            Gerenciar categorias
+        </a>
+
+        <a href="#gerenciarPedidos"
+           class="btn btn-claro">
+            Gerenciar pedidos
+        </a>
+
+    </div>
+
+    <!-- ================================= -->
+    <!-- CADASTRO E EDIÇÃO DE PRODUTOS     -->
+    <!-- ================================= -->
+
+    <section
+        class="admin-card admin-secao"
+        id="cadastroProduto">
+
+        <h2 id="tituloFormulario">
+            Cadastrar produto
+        </h2>
+
+        <form id="formProduto">
+
+            <input type="hidden" id="produtoId">
+
+            <label for="nome">
+                Nome do produto
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                required>
+
+            <label for="descricao">
+                Descrição
+            </label>
+
+            <textarea id="descricao"></textarea>
+
+            <label for="preco">
+                Preço
+            </label>
+
+            <input
+                type="number"
+                id="preco"
+                min="0.01"
+                step="0.01"
+                required>
+
+            <label for="estoque">
+                Quantidade em estoque
+            </label>
+
+            <input
+                type="number"
+                id="estoque"
+                min="0"
+                required>
+
+            <label for="imagemUrl">
+                URL da imagem
+            </label>
+
+            <input
+                type="url"
+                id="imagemUrl">
+
+            <label for="categoria">
+                Categoria
+            </label>
+
+            <select id="categoria" required>
+
+                <option value="">
+                    Selecione
+                </option>
+
+            </select>
+
+            <button type="submit" class="btn">
+                Salvar produto
+            </button>
+
+            <button
+                type="button"
+                id="cancelarEdicao"
+                class="btn btn-claro">
+                Cancelar
+            </button>
+
+        </form>
+
+        <p id="mensagem" role="status"></p>
+
+    </section>
+
+    <!-- ================================= -->
+    <!-- PRODUTOS CADASTRADOS              -->
+    <!-- ================================= -->
+
+    <section
+        class="admin-secao"
+        id="produtosCadastrados">
+
+        <h2>Produtos cadastrados</h2>
+
+        <div class="admin-lista">
+
+            <table class="admin-tabela">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Estoque</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listaProdutos"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    <!-- ================================= -->
+    <!-- GERENCIAMENTO DE CATEGORIAS       -->
+    <!-- ================================= -->
+
+    <section
+        class="admin-card admin-secao"
+        id="gerenciarCategorias">
+
+        <h2>Gerenciamento de categorias</h2>
+
+        <p>
+            Cadastre novas categorias ou altere
+            o nome das categorias existentes.
+        </p>
+
+        <!-- Formulário de cadastro e edição -->
+
+        <form id="formCategoria">
+
+            <!-- Identifica a categoria em edição -->
+            <input
+                type="hidden"
+                id="categoriaEdicaoId">
+
+            <label for="nomeCategoria">
+                Nome da categoria
+            </label>
+
+            <input
+                type="text"
+                id="nomeCategoria"
+                maxlength="80"
+                placeholder="Ex.: Periféricos"
+                required>
+
+            <button
+                type="submit"
+                id="salvarCategoria"
+                class="btn">
+
+                Cadastrar categoria
+
+            </button>
+
+            <button
+                type="button"
+                id="cancelarEdicaoCategoria"
+                class="btn btn-claro"
+                hidden>
+
+                Cancelar edição
+
+            </button>
+
+        </form>
+
+        <p
+            id="mensagemCategorias"
+            role="status">
+        </p>
+
+        <!-- Listagem das categorias -->
+
+        <h3>Categorias cadastradas</h3>
+
+        <div class="admin-lista">
+
+            <table class="admin-tabela">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listaCategoriasAdmin">
+
+                    <tr>
+                        <td colspan="3">
+                            Carregando categorias...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    <!-- ================================= -->
+    <!-- GERENCIAMENTO DE PEDIDOS          -->
+    <!-- ================================= -->
+
+    <section
+        class="admin-card admin-secao"
+        id="gerenciarPedidos">
+
+        <h2>Gerenciamento de pedidos</h2>
+
+        <p>
+            Consulte os pedidos realizados pelos clientes
+            e atualize a situação das entregas.
+        </p>
+
+        <!-- Resumo dos pedidos -->
+
+        <div class="resumo-pedidos">
+
+            <div class="resumo-card">
+
+                <h3>Total de pedidos</h3>
+
+                <strong id="totalPedidos">0</strong>
+
+            </div>
+
+            <div class="resumo-card">
+
+                <h3>Aguardando pagamento</h3>
+
+                <strong id="pedidosPendentes">0</strong>
+
+            </div>
+
+            <div class="resumo-card">
+
+                <h3>Pagos</h3>
+
+                <strong id="pedidosPagos">0</strong>
+
+            </div>
+
+            <div class="resumo-card">
+
+                <h3>Enviados</h3>
+
+                <strong id="pedidosEnviados">0</strong>
+
+            </div>
+
+            <div class="resumo-card">
+
+                <h3>Entregues</h3>
+
+                <strong id="pedidosEntregues">0</strong>
+
+            </div>
+
+            <div class="resumo-card">
+
+                <h3>Cancelados</h3>
+
+                <strong id="pedidosCancelados">0</strong>
+
+            </div>
+
+        </div>
+
+        <!-- Relatório de vendas: valores reais da API -->
+        <div class="resumo-pedidos" aria-label="Indicadores financeiros">
+            <div class="resumo-card"><h3>Receita confirmada</h3><strong id="receitaConfirmada">R$ 0,00</strong></div>
+            <div class="resumo-card"><h3>Pedidos pagos e em andamento</h3><strong id="pedidosRecebidos">0</strong></div>
+            <div class="resumo-card"><h3>Valor aguardando pagamento</h3><strong id="valorPendente">R$ 0,00</strong></div>
+        </div>
+
+        <div class="filtro-pedidos">
+            <label for="pesquisaPedidos">Pesquisar por número, cliente ou e-mail</label>
+            <input id="pesquisaPedidos" type="search" placeholder="Número do pedido, cliente ou e-mail">
+        </div>
+
+        <!-- Filtro de pedidos -->
+
+        <div class="filtro-pedidos">
+
+            <label for="filtroStatus">
+                Filtrar pedidos por status
+            </label>
+
+            <select id="filtroStatus">
+
+                <option value="TODOS">
+                    Todos os pedidos
+                </option>
+
+                <option value="AGUARDANDO_PAGAMENTO">
+                    Aguardando pagamento
+                </option>
+
+                <option value="PAGO">
+                    Pagos
+                </option>
+
+                <option value="ENVIADO">
+                    Enviados
+                </option>
+
+                <option value="ENTREGUE">
+                    Entregues
+                </option>
+
+                <option value="CANCELADO">
+                    Cancelados
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- Botão para atualizar os pedidos -->
+
+        <button
+            type="button"
+            id="atualizarPedidos"
+            class="btn">
+
+            Atualizar pedidos
+
+        </button>
+
+        <p
+            id="mensagemPedidos"
+            role="status">
+        </p>
+
+        <button type="button" id="exportarPedidos" class="btn btn-claro">Exportar pedidos (CSV)</button>
+
+        <!-- Tabela de pedidos -->
+
+        <div class="admin-lista">
+
+            <table class="admin-tabela">
+
+                <thead>
+
+                    <tr>
+                        <th>Pedido</th>
+                        <th>Cliente</th>
+                        <th>Produtos</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="listaPedidosAdmin">
+
+                    <tr>
+                        <td colspan="6">
+                            Carregando pedidos...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    <!-- Detalhes dos pedidos, preenchidos sem HTML da API -->
+    <section class="admin-card admin-secao" id="detalhesPedido" hidden aria-live="polite">
+        <h2>Detalhes do pedido <span id="numeroDetalhePedido"></span></h2>
+        <div id="conteudoDetalhesPedido"></div>
+        <button type="button" class="btn btn-claro" id="fecharDetalhesPedido">Fechar detalhes</button>
+    </section>
+
+</main>
+
+<!-- Scripts -->
+
+<script src="/js/admin.js"></script>
+<script src="/js/admin-pedidos.js"></script>
+<script src="/js/admin-categorias.js"></script>
+<script src="/js/nav.js"></script>
+
+</body>
+</html>
